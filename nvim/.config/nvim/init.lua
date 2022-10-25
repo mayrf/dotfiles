@@ -13,6 +13,7 @@ require("user.nvim-tree")
 require("user.bufferline")
 require("user.lualine")
 require("user.toggleterm")
+require("user.illuminate")
 -- require "user.project"
 require("user.impatient")
 -- require "user.indentline"
