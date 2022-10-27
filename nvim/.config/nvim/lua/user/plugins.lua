@@ -53,6 +53,9 @@ return packer.startup(function(use)
 	use("akinsho/toggleterm.nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("lewis6991/impatient.nvim")
+	use("lukas-reineke/indent-blankline.nvim")
+	use("Darazaki/indent-o-matic")
+	use("goerz/jupytext.vim")
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
@@ -75,7 +78,7 @@ return packer.startup(function(use)
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 	use("jose-elias-alvarez/null-ls.nvim")
-    use("RRethy/vim-illuminate")
+	use("RRethy/vim-illuminate")
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

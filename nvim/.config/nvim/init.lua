@@ -14,9 +14,12 @@ require("user.bufferline")
 require("user.lualine")
 require("user.toggleterm")
 require("user.illuminate")
--- require "user.project"
 require("user.impatient")
--- require "user.indentline"
+require("user.indentline")
+require("user.ident-o-matic")
+require("user.jupytext")
+
+-- require "user.project"
 -- require "user.alpha"
 -- require "user.whichkey"
 -- require "user.autocommands"
