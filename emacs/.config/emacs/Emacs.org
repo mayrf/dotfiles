@@ -157,6 +157,13 @@ This section configures basic UI settings that remove unneeded elements to make 
 
 #+end_src
 
+** Minimap, Smooth scrolling
+
+#+begin_src emacs-lisp
+  (use-package sublimity)
+(use-package sublimity)
+#+end_src
+
 ** Font Configuration
 
 I am using the [[https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode][FiraCode Nerd Font]] and [[https://www.cufonfonts.com/font/bookerly][Bookerly]] fonts for this configuration which will more than likely need to be installed on your machine.  Both can usually be found in the various Linux distro package managers or downloaded from the links above.
@@ -512,39 +519,57 @@ Emojify is an Emacs extension to display emojis. It can display github style emo
 
 #+begin_src emacs-lisp
 
-  (use-package ivy
-    :diminish
-    :bind (("C-s" . swiper)
-           :map ivy-minibuffer-map
-           ("TAB" . ivy-alt-done)
-           ("C-l" . ivy-alt-done)
-           ("C-j" . ivy-next-line)
-           ("C-k" . ivy-previous-line)
-           :map ivy-switch-buffer-map
-           ("C-k" . ivy-previous-line)
-           ("C-l" . ivy-done)
-           ("C-d" . ivy-switch-buffer-kill)
-           :map ivy-reverse-i-search-map
-           ("C-k" . ivy-previous-line)
-           ("C-d" . ivy-reverse-i-search-kill))
-    :config
-    (ivy-mode 1))
+    (use-package ivy
+      :diminish
+      :bind (("C-s" . swiper)
+             :map ivy-minibuffer-map
+             ("TAB" . ivy-alt-done)
+             ("C-l" . ivy-alt-done)
+             ("C-j" . ivy-next-line)
+             ("C-k" . ivy-previous-line)
+             :map ivy-switch-buffer-map
+             ("C-k" . ivy-previous-line)
+             ("C-l" . ivy-done)
+             ("C-d" . ivy-switch-buffer-kill)
+             :map ivy-reverse-i-search-map
+             ("C-k" . ivy-previous-line)
+             ("C-d" . ivy-reverse-i-search-kill))
+      :config
+      (ivy-mode 1))
 
-  (use-package ivy-rich
-    :after ivy
-    :init
-    (ivy-rich-mode 1))
+    (use-package ivy-rich
+      :init
+      (require 'ivy-rich)
+      (ivy-rich-mode 1)
+      (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
-  (use-package counsel
-    :bind (("C-M-j" . 'counsel-switch-buffer)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history))
-    :custom
-    (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
-    :config
-    (counsel-mode 1))
+  (use-package all-the-icons-ivy-rich
+   :init (all-the-icons-ivy-rich-mode 1))
+
+    (use-package counsel
+      :bind (("C-M-j" . 'counsel-switch-buffer)
+             :map minibuffer-local-map
+             ("C-r" . 'counsel-minibuffer-history))
+      :custom
+      (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
+      :config
+      (counsel-mode 1))
 
 #+end_src
+
+** Making M-x Great Again!
+The following line removes the annoying '^' in things like counsel-M-x and other ivy/counsel prompts.  The default '^' string means that if you type something immediately after this string only completion candidates that begin with what you typed are shown.  Most of the time, I'm searching for a command without knowing what it begins with though.
+
+#+begin_src emacs-lisp
+(setq ivy-initial-inputs-alist nil)
+#+end_src
+
+Smex is a package the makes M-x remember our history.  Now M-x will show our last used commands first.
+#+begin_src emacs-lisp
+(use-package smex)
+(smex-initialize)
+ #+end_src
+
 
 *** Improved Candidate Sorting with prescient.el
 
@@ -554,14 +579,14 @@ This Prescient configuration is optimized for use in System Crafters videos and 
 
 #+begin_src emacs-lisp
 
-  (use-package ivy-prescient
-    :after counsel
-    :custom
-    (ivy-prescient-enable-filtering nil)
-    :config
+ ; (use-package ivy-prescient
+ ;   :after counsel
+ ;  :custom
+ ;  (ivy-prescient-enable-filtering nil)
+ ;  :config
     ;; Uncomment the following line to have sorting remembered across sessions!
     ;(prescient-persist-mode 1)
-    (ivy-prescient-mode 1))
+ ;  (ivy-prescient-mode 1))
 
 #+end_src
 
@@ -814,7 +839,7 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
 #+begin_src emacs-lisp
 
   (defun efs/org-mode-visual-fill ()
-    (setq visual-fill-column-width 100
+    (setq-default visual-fill-column-width 75 
           visual-fill-column-center-text t)
     (visual-fill-column-mode 1))
 
@@ -827,10 +852,10 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
 We want the same syntax highlighting in source blocks as in the native language files.
 
 #+begin_src emacs-lisp
-(setq org-src-fontify-natively t
-    org-src-tab-acts-natively t
-    org-confirm-babel-evaluate nil
-    org-edit-src-content-indentation 0)
+;(setq org-src-fontify-natively t
+;    org-src-tab-acts-natively t
+;   org-confirm-babel-evaluate nil
+;   org-edit-src-content-indentation 0)
 #+end_src
 
 *** Allow multiline markup
@@ -1069,7 +1094,7 @@ There are a number of other language servers for Python so if you find that =pyl
 
   (use-package python-mode
     :ensure t
-    :hook (python-mode . lsp-deferred)
+;;    :hook (python-mode . lsp-deferred)
     :custom
     ;; NOTE: Set these if Python 3 is called "python3" on your system!
     ;; (python-shell-interpreter "python3")
@@ -1079,6 +1104,16 @@ There are a number of other language servers for Python so if you find that =pyl
     (require 'dap-python))
 
 
+#+end_src
+
+Install pyright language server
+
+#+begin_src emacs-lisp
+
+(use-package lsp-pyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
 #+end_src
 
 You can use the pyvenv package to use =virtualenv= environments in Emacs.  The =pyvenv-activate= command should configure Emacs to cause =lsp-mode= and =dap-mode= to use the virtual environment when they are loaded, just select the path to your virtual environment before loading your project.
