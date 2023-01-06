@@ -838,13 +838,13 @@ We use [[https://github.com/joostkremers/visual-fill-column][visual-fill-column]
 
 #+begin_src emacs-lisp
 
-  (defun efs/org-mode-visual-fill ()
-    (setq-default visual-fill-column-width 75 
-          visual-fill-column-center-text t)
-    (visual-fill-column-mode 1))
+  ;; (defun efs/org-mode-visual-fill ()
+  ;;   (setq-default visual-fill-column-width 75 
+  ;;         visual-fill-column-center-text t)
+  ;;   (visual-fill-column-mode 1))
 
-  (use-package visual-fill-column
-    :hook (org-mode . efs/org-mode-visual-fill))
+  ;; (use-package visual-fill-column
+  ;;   :hook (org-mode . efs/org-mode-visual-fill))
 
 #+end_src
 

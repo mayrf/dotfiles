@@ -549,13 +549,13 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun efs/org-mode-visual-fill ()
-  (setq-default visual-fill-column-width 75 
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+;; (defun efs/org-mode-visual-fill ()
+;;   (setq-default visual-fill-column-width 75 
+;;         visual-fill-column-center-text t)
+;;   (visual-fill-column-mode 1))
 
-(use-package visual-fill-column
-  :hook (org-mode . efs/org-mode-visual-fill))
+;; (use-package visual-fill-column
+;;   :hook (org-mode . efs/org-mode-visual-fill))
 
 ;(setq org-src-fontify-natively t
 ;    org-src-tab-acts-natively t
