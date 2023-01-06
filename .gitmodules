@@ -1,3 +1,6 @@
 [submodule "chemacs/.config/emacs"]
 	path = chemacs/.config/emacs
 	url = https://github.com/plexus/chemacs2.git
+[submodule "emacs/.config/emacs-configs/spacemacs"]
+	path = emacs/.config/emacs-configs/spacemacs
+	url = git@github.com:syl20bnr/spacemacs
