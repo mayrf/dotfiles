@@ -570,6 +570,19 @@
   ;; settings from above.
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
 
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/org/RoamNotes")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+       ("C-c n f" . org-roam-node-find)
+       ("C-c n i" . org-roam-node-insert)
+       :map org-mode-map
+       ("C-M-i"    . completion-at-point))
+  :config
+  (org-roam-setup))
+
 (use-package toc-org
   :commands toc-org-enable
   :init (add-hook 'org-mode-hook 'toc-org-enable))
