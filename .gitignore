@@ -1,2 +1,7 @@
 
 nvim/.config/nvim/plugin/**
+
+
+emacs/.config/emacs-configs/*
+!emacs/.config/emacs-configs/efs/init.el
+!emacs/.config/emacs-configs/efs/Emacs.el
