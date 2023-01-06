@@ -9,9 +9,9 @@
 (defvar efs/frame-transparency '(90 . 90))
 
 ;; Using garbage magic hack.
- (use-package gcmh
-   :config
-   (gcmh-mode 1))
+;; (use-package gcmh
+;;   :config
+;;   (gcmh-mode 1))
 ;; Setting garbage collection threshold
 ;; The default is 800 kilobytes.  Measured in bytes.
 ;; (setq gc-cons-threshold (* 50 1000 1000))
@@ -57,7 +57,7 @@
 
 ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
 ;; reliably, set `user-emacs-directory` before loading no-littering!
-(setq user-emacs-directory "~/.config/emacs")
+(setq user-emacs-directory "~/.cache/emacs/efs")
 
 (use-package no-littering)
 
@@ -127,7 +127,7 @@
     (efs/leader-keys
       "t"  '(:ignore t :which-key "toggles")
       "tt" '(counsel-load-theme :which-key "choose theme")
-      "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org")))))
+      "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.config/emacs-configs/efs/Emacs.org")))))
 
   (use-package evil
     :init
@@ -159,7 +159,7 @@
        "SPC"   '(counsel-M-x :which-key "M-x")
        "c c"   '(compile :which-key "Compile")
        "c C"   '(recompile :which-key "Recompile")
-       "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+       "h r r" '((lambda () (interactive) (load-file "~/.config/emacs-configs/efs/init.el")) :which-key "Reload emacs config")
        "t t"   '(toggle-truncate-lines :which-key "Toggle truncate lines"))
 (efs/leader-keys
        "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")

@@ -1,4 +1,4 @@
-#+title: Emacs From Scratch Configuration
+om+title: Emacs From Scratch Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 
 * Welcome!
@@ -35,9 +35,9 @@ Makes startup faster by reducing the frequency of garbage collection
 
 #+begin_src emacs-lisp
   ;; Using garbage magic hack.
-   (use-package gcmh
-     :config
-     (gcmh-mode 1))
+  ;; (use-package gcmh
+  ;;   :config
+  ;;   (gcmh-mode 1))
   ;; Setting garbage collection threshold
   ;; The default is 800 kilobytes.  Measured in bytes.
   ;; (setq gc-cons-threshold (* 50 1000 1000))
@@ -109,7 +109,7 @@ We use the [[https://github.com/emacscollective/no-littering/blob/master/no-litt
 
   ;; NOTE: If you want to move everything out of the ~/.emacs.d folder
   ;; reliably, set `user-emacs-directory` before loading no-littering!
-  (setq user-emacs-directory "~/.config/emacs")
+  (setq user-emacs-directory "~/.cache/emacs/efs")
 
   (use-package no-littering)
 
@@ -212,7 +212,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (efs/leader-keys
       "t"  '(:ignore t :which-key "toggles")
       "tt" '(counsel-load-theme :which-key "choose theme")
-      "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org")))))
+      "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.config/emacs-configs/efs/Emacs.org")))))
 
   (use-package evil
     :init
@@ -249,7 +249,7 @@ General.el allows us to set keybindings.  As a longtime Doom Emacs user, I have 
        "SPC"   '(counsel-M-x :which-key "M-x")
        "c c"   '(compile :which-key "Compile")
        "c C"   '(recompile :which-key "Recompile")
-       "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+       "h r r" '((lambda () (interactive) (load-file "~/.config/emacs-configs/efs/init.el")) :which-key "Reload emacs config")
        "t t"   '(toggle-truncate-lines :which-key "Toggle truncate lines"))
 (efs/leader-keys
        "m *"   '(org-ctrl-c-star :which-key "Org-ctrl-c-star")
